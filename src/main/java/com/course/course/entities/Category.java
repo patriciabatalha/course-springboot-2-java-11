@@ -2,6 +2,8 @@ package com.course.course.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -13,7 +15,10 @@ public class Category implements Serializable {
     private Long Id;
     private String Name;
 
-    public Category(){
+    @Transient
+    private Set<Product> products = new HashSet<>();
+
+    public Category() {
     }
 
     public Category(Long id, String name) {
@@ -37,6 +42,10 @@ public class Category implements Serializable {
         Name = name;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,5 +61,5 @@ public class Category implements Serializable {
         return getId() != null ? getId().hashCode() : 0;
     }
 
-
 }
+
